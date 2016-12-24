@@ -1,6 +1,6 @@
 {
   "name": "relmapper",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Map relational data to JSON",
   "main": "index.js",
   "scripts": {
