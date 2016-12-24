@@ -1,0 +1,23 @@
+{
+  "name": "relmapper",
+  "version": "0.1.0",
+  "description": "Map relational data to JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinydesk/relmapper.git"
+  },
+  "keywords": [
+    "database",
+    "orm"
+  ],
+  "author": "Hannes Widmoser",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tinydesk/relmapper/issues"
+  },
+  "homepage": "https://github.com/tinydesk/relmapper#readme"
+}
