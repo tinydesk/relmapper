@@ -9,27 +9,27 @@ mapper.case = {
   unapply: o => _.mapKeys(o, (value, key) => key.replace(/_./g, c => `${c[1].toUpperCase()}`))
 };
 
-mapper.flatten = {
+mapper.flatten = delimiter => ({
   apply: o => {
     const result = {};
     const r = (path, o) => {
       if (_.isObject(o)) {
         _.forEach(o, (value, key) => r(path.concat(key), value));
       } else {
-        result[_.join(path, '.')] = o;
+        result[_.join(path, delimiter)] = o;
       }
     }
     r([], o);
     return result;
   },
-  unapply: o => _.transform(o, (o, value, key) => _.set(o, key, value), {})
-};
+  unapply: o => _.transform(o, (o, value, key) => _.set(o, key.replace(delimiter, '.'), value), {})
+});
 
 mapper.sequence = (...pipeline) => ({
   apply: o => _.reduce(pipeline, (res, current) => current.apply(res), o),
   unapply: o => _.reduce(_.reverse(pipeline), (res, current) => current.unapply(res), o)
 });
 
-mapper.default = mapper.sequence(mapper.flatten);
+mapper.default = mapper.sequence(mapper.flatten('_'));
 
 module.exports = mapper;

@@ -19,7 +19,7 @@ describe('case', () => {
 
 describe('flatten', () => {
 
-  const test = tester(mapper.flatten);
+  const test = tester(mapper.flatten('_'));
 
   test({ myPropertyName: 1 }, { myPropertyName: 1 });
   test(
@@ -31,7 +31,7 @@ describe('flatten', () => {
     },
     {
       myPropertyName: 1,
-      "nestedProperty.anotherProperty": 2
+      "nestedProperty_anotherProperty": 2
     }
   );
 
@@ -39,7 +39,7 @@ describe('flatten', () => {
 
 describe('sequence', () => {
 
-  const test = tester(mapper.sequence(mapper.flatten, mapper.case));
+  const test = tester(mapper.sequence(mapper.flatten('.'), mapper.case));
 
   test(
     {
