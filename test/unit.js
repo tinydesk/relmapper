@@ -34,6 +34,37 @@ describe('flatten', () => {
       "nestedProperty_anotherProperty": 2
     }
   );
+  test(
+    {
+      date: new Date('2015-09-01T00:00:00.000Z'),
+      type: 'tour',
+      timeAbroad: 0,
+      pause: 1.5,
+      standing: 5,
+      absence: {
+        start: new Date('2015-09-01T03:22:00.000Z'),
+        end: new Date('2015-09-01T15:40:00.000Z')
+      },
+      destination: { country: 'at', location: 'L7A' },
+      working: {
+        start: new Date('2015-09-01T03:22:00.000Z'),
+        end: new Date('2015-09-01T15:40:00.000Z')
+      }
+    },
+    {
+      date: new Date('2015-09-01T00:00:00.000Z'),
+      type: 'tour',
+      timeAbroad: 0,
+      pause: 1.5,
+      standing: 5,
+      absence_start: new Date('2015-09-01T03:22:00.000Z'),
+      absence_end: new Date('2015-09-01T15:40:00.000Z'),
+      destination_country: 'at', 
+      destination_location: 'L7A',
+      working_start: new Date('2015-09-01T03:22:00.000Z'),
+      working_end: new Date('2015-09-01T15:40:00.000Z')
+    }
+  )
 
 });
 

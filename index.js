@@ -13,7 +13,7 @@ mapper.flatten = delimiter => ({
   apply: o => {
     const result = {};
     const r = (path, o) => {
-      if (_.isObject(o)) {
+      if (_.isPlainObject(o)) {
         _.forEach(o, (value, key) => r(path.concat(key), value));
       } else {
         result[_.join(path, delimiter)] = o;
