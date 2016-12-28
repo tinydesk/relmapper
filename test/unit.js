@@ -70,19 +70,36 @@ describe('flatten', () => {
 
 describe('sequence', () => {
 
-  const test = tester(mapper.sequence(mapper.flatten('.'), mapper.case));
-
-  test(
-    {
-      myPropertyName: 1,
-      nestedProperty: {
-        anotherProperty: 2
+  describe('case _, flatten .', () => {
+    const test = tester(mapper.sequence(mapper.flatten('.'), mapper.case));
+    test(
+      {
+        myPropertyName: 1,
+        nestedProperty: {
+          anotherProperty: 2
+        }
+      },
+      {
+        my_property_name: 1,
+        "nested_property.another_property": 2
       }
-    },
-    {
-      my_property_name: 1,
-      "nested_property.another_property": 2
-    }
-  );
+    );
+  });
+
+  describe('case _, flatten __', () => {
+    const test = tester(mapper.sequence(mapper.flatten('__'), mapper.case));
+    test(
+      {
+        myPropertyName: 1,
+        nestedProperty: {
+          anotherProperty: 2
+        }
+      },
+      {
+        my_property_name: 1,
+        nested_property__another_property: 2
+      }
+    );
+  });
 
 });

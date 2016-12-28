@@ -6,7 +6,7 @@ const mapper = {};
  */
 mapper.case = {
   apply: o => _.mapKeys(o, (value, key) => key.replace(/[A-Z]/g, c => `_${c.toLowerCase()}`)),
-  unapply: o => _.mapKeys(o, (value, key) => key.replace(/_./g, c => `${c[1].toUpperCase()}`))
+  unapply: o => _.mapKeys(o, (value, key) => key.replace(/[a-zA-Z]_[a-zA-Z]/g, c => `${c[0]}${c[2].toUpperCase()}`))
 };
 
 mapper.flatten = delimiter => ({
