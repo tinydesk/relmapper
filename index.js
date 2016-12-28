@@ -30,6 +30,6 @@ mapper.sequence = (...pipeline) => ({
   unapply: o => _.reduce(_.reverse(pipeline), (res, current) => current.unapply(res), o)
 });
 
-mapper.default = mapper.sequence(mapper.flatten('_'));
+mapper.default = mapper.sequence(mapper.flatten('__'), mapper.case);
 
 module.exports = mapper;
