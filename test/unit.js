@@ -93,11 +93,17 @@ describe('sequence', () => {
         myPropertyName: 1,
         nestedProperty: {
           anotherProperty: 2
+        },
+        premium: {
+          period: {
+            length: 5
+          }
         }
       },
       {
         my_property_name: 1,
-        nested_property__another_property: 2
+        nested_property__another_property: 2,
+        premium__period__length: 5
       }
     );
   });
