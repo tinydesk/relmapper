@@ -42,12 +42,13 @@ CREATE TABLE(
 var queryResult = query('SELECT * FROM mytable');
 mapper.unapply(queryResult); 
 /*
-returns {
+returns [{
   myJsonProperty: 5,
   myNested: {
    jsonProperty: 'with text'
   } 
-}
+},
+...]
  */
 ```
 
@@ -60,7 +61,7 @@ json -> mapper1.apply -> mapper2.apply -> mapper3.apply -> db object
 db object -> mapper3.unapply -> mapper2.unapply -> mapper1.unapply -> json
 ```
  
-The module exposes the following mappers:
+ A mapper can either transform a single object or an array of objects. The module exposes the following mappers:
 
 ### flatten(delimiter)
 
@@ -115,3 +116,13 @@ var default = relmapper.sequence(relmapper.flatten('__'), relmapper.case);
 ```
 
 See the getting started section for an example of this mapper.
+
+### fromObjectMapper(mapper)
+
+Creates a mapper that can handle both arrays and objects from a simpler mapper that only processes objects. 
+
+## Changelog
+
+### 0.2.0
+
+- Changed the mapper interface to also support arrays as arguments to `apply` and `unapply`.

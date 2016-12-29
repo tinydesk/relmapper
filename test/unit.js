@@ -15,6 +15,17 @@ describe('case', () => {
   test({ propertyname: 1 }, { propertyname: 1 });
   test({ "property.myName": 1 }, { "property.my_name": 1 });
 
+  test([
+    { myPropertyName: 1 },
+    { myPropertyName: 2 },
+    { myPropertyName: 3 }
+  ],
+  [
+    { my_property_name: 1 },
+    { my_property_name: 2 },
+    { my_property_name: 3 }
+  ]);
+
 });
 
 describe('flatten', () => {
@@ -65,6 +76,15 @@ describe('flatten', () => {
       working_end: new Date('2015-09-01T15:40:00.000Z')
     }
   )
+  test([
+    { a: { b: { c: 3 } } },
+    { a: { b: { c: 2 } } },
+    { a: { b: { c: 1 } } }
+  ], [
+    { a_b_c: 3 },
+    { a_b_c: 2 },
+    { a_b_c: 1 }
+  ])
 
 });
 
@@ -106,6 +126,16 @@ describe('sequence', () => {
         premium__period__length: 5
       }
     );
+    test([
+        { myPropertyName: { myNestedPropertyName: 1 } },
+        { myPropertyName: { myNestedPropertyName: 2 } },
+        { myPropertyName: { myNestedPropertyName: 3 } }
+      ],
+      [
+        { my_property_name__my_nested_property_name: 1 },
+        { my_property_name__my_nested_property_name: 2 },
+        { my_property_name__my_nested_property_name: 3 }
+      ]);
   });
 
 });
