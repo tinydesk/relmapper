@@ -14,7 +14,7 @@ npm install relmapper --save
 
 Convert json to a db record:
 ```javascript
-var mapper = require('relmapper').default;
+var mapper = require('relmapper').defaultMapper;
 var json = {
   myJsonProperty: 5,
   myNested: {
@@ -83,7 +83,7 @@ returns { a: { b: { c: 1 } } }
  */
 ```
 
-### case
+### camelCase
 
 Transforms camel case to snake case and vice versa. This is needed since most relational database systems are case insensitive.
 
@@ -91,13 +91,13 @@ Examples:
 ```javascript
 var relmapper = require('relmapper');
 var json = { aCamelCaseProperty: 1 };
-relmapper.case.apply(json);
+relmapper.camelCase.apply(json);
 /*
 returns { a_camel_case_property: 1 }
  */
 
 var result = { a_camel_case_property: 1 };
-relmapper.case.unapply(result);
+relmapper.camelCase.unapply(result);
 /*
 returns { aCamelCaseProperty: 1 }
  */
@@ -109,10 +109,10 @@ Mappers can be combined to form more complex mappers:
 
 Creates a pipeline of mappers that are applied in sequence. The order is reversed when unapplying.
 
-The library also publishes a `default` mapper which is defined as a sequence of flatten and case:
+The library also publishes a `defaultMapper` which is defined as a sequence of flatten and camelCase:
 
 ```javascript
-var default = relmapper.sequence(relmapper.flatten('__'), relmapper.case);
+var defaultMapper = relmapper.sequence(relmapper.flatten('__'), relmapper.camelCase);
 ```
 
 See the getting started section for an example of this mapper.
@@ -122,6 +122,13 @@ See the getting started section for an example of this mapper.
 Creates a mapper that can handle both arrays and objects from a simpler mapper that only processes objects. 
 
 ## Changelog
+
+### 0.3.0
+
+- Reimplemented the existing functionality in typescript. 
+- Changed the following names due to collisions with keywords:
+    - `default` becomes `defaultMapper`
+    - `case` becomes `camelCase`
 
 ### 0.2.0
 

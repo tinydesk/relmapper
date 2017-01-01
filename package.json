@@ -2,8 +2,10 @@
   "name": "relmapper",
   "version": "0.2.0",
   "description": "Map relational data to JSON",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
+    "prepublish": "tsc",
     "test": "node_modules/mocha/bin/mocha"
   },
   "repository": {
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/tinydesk/relmapper#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.45",
     "chai": "^3.5.0",
     "lodash": "^4.17.3",
     "mocha": "^3.2.0"

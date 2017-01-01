@@ -1,6 +1,6 @@
 const chai = require('chai');
 const should = chai.should();
-const mapper = require('../index');
+const mapper = require('../dist/index');
 
 const tester = obj => (json, db) => {
   it(`should correctly apply`, () => obj.apply(json).should.eql(db));
@@ -9,7 +9,7 @@ const tester = obj => (json, db) => {
 
 describe('case', () => {
 
-  const test = tester(mapper.case);
+  const test = tester(mapper.camelCase);
 
   test({ myPropertyName: 1 }, { my_property_name: 1 });
   test({ propertyname: 1 }, { propertyname: 1 });
@@ -91,7 +91,7 @@ describe('flatten', () => {
 describe('sequence', () => {
 
   describe('case _, flatten .', () => {
-    const test = tester(mapper.sequence(mapper.flatten('.'), mapper.case));
+    const test = tester(mapper.sequence(mapper.flatten('.'), mapper.camelCase));
     test(
       {
         myPropertyName: 1,
@@ -107,7 +107,7 @@ describe('sequence', () => {
   });
 
   describe('case _, flatten __', () => {
-    const test = tester(mapper.sequence(mapper.flatten('__'), mapper.case));
+    const test = tester(mapper.sequence(mapper.flatten('__'), mapper.camelCase));
     test(
       {
         myPropertyName: 1,
